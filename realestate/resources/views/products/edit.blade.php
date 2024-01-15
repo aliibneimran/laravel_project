@@ -7,19 +7,19 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form id="demo-form" data-parsley-validate="" action="" method="POST">
+                <form id="demo-form" data-parsley-validate="" action="{{route('products.update',$products->id)}}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="fullname" class="form-label">Name * :</label>
-                        <input type="text" class="form-control" name="name" id="fullname" required="">
+                        <input type="text" class="form-control" name="name" id="fullname" required="" value="{{old('name')?old('name'):$products->name}}">
                     </div>
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email * :</label>
-                        <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required="">
+                        <input type="email" id="email" class="form-control" name="email" data-parsley-trigger="change" required="" value="{{old('name')?old('name'):$products->email}}">
                     </div>
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label class="form-label">Gender *:</label>
 
                         <div class="form-check mb-1">
@@ -30,9 +30,9 @@
                             <input type="radio" name="gender" id="genderF" value="Female" class="form-check-input">
                             <label for="genderF" class="form-check-label">Female</label>
                         </div>
-                    </div> -->
+                    </div>
 
-                    <!-- <div class="mb-3">
+                    <div class="mb-3">
                         <label class="form-label">Hobbies (Optional, but 2 minimum):</label>
 
                         <div class="form-check  mb-1">
@@ -47,16 +47,17 @@
                             <input type="checkbox" name="hobbies[]" id="hobby3" value="eat" class="form-check-input" />
                             <label for="hobby3" class="form-check-label"> Eating </label>
                         </div>
-                    </div> -->
-                    <!-- <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
                         <label for="heard" class="form-label">Heard about us via *:</label>
-                        <select id="heard" class="form-select" required="">
+                        <select id="heard" class="form-select" name="category" required="">
                             <option value="">Choose..</option>
-                            <option value="press">Press</option>
-                            <option value="net">Internet</option>
-                            <option value="other">Other..</option>
+                            @foreach($categories as $cat)
+                            <!-- <option value="{{$cat->id}}">{{$cat->name}}</option> -->
+                            <option value="{{$cat->id}}" {{$cat->id == $products->category_id ? 'selected' : '' }}>{{$cat->name}}</option>
+                            @endforeach
                         </select>
-                    </div> -->
+                    </div>
                     <div>
                         <input type="submit" class="btn btn-success" value="Add">
                     </div>

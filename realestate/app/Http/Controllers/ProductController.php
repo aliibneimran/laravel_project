@@ -32,6 +32,7 @@ class ProductController extends Controller
     }
     public function edit($pid){
         $product = Product::find($pid);
+        $data['categories'] = Category::all();
         $data['products'] = $product;
         return view('products.edit',$data);
     }
